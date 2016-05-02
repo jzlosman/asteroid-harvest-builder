@@ -1,0 +1,29 @@
+<section>
+  <div class="page-header">
+    <h1 ng-bind="vm.card.label"></h1>
+    <small>{{vm.card.type}}</small>
+  </div>
+  <div class="pull-right">
+    <a class="btn btn-primary" ui-sref="cards.edit({ cardId: vm.card._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <p class="lead" ng-bind="vm.card.energy"></p>
+</section>
+<section>
+  <div class="fullCard" ng-if="vm.card.type =='Action'">
+    <img src="https://s3.amazonaws.com/gettattlemisc/harvest/backs/card_bg_action.jpg" style="width:100%; height:auto;"/>
+    <div class="cardLabel"><h1>{{vm.card.label}}</h1></div>
+    <div class="cardImg"><img src="{{vm.card.img}}" alt="{{vm.card.label}}"></div>
+    <div class="cardCost">{{vm.card.cost}}</div>
+    <div class="cardRequires">{{vm.card.requires}}</div>
+    <div class="cardText">{{vm.card.text}}</div>
+  </div>
+  <div class="fullCard" ng-if="vm.card.type =='Resource'">
+    <img src="https://s3.amazonaws.com/gettattlemisc/harvest/backs/card_bg_resource.jpg" style="width:100%; height:auto;"/>
+    <div class="cardOverlay"><img src="{{vm.card.img}}" alt="{{vm.card.label}}"></div>
+  </div>
+</section>
