@@ -1,0 +1,17 @@
+{"_id":{"$oid":"572428d2f1532f942f0b4b13"},"label":"Pygorite","amount":1,"energies":[],"type":"Resource","__v":0,"img":"https://s3.amazonaws.com/gettattlemisc/harvest/img/paresytin.png"}
+{"_id":{"$oid":"5724342bf0d21dd8513e543c"},"label":"Dimentium","img":"https://s3.amazonaws.com/gettattlemisc/harvest/img/diamantium.png","amount":1,"energies":[],"type":"Resource","__v":0}
+{"_id":{"$oid":"5724394490acb9343ef2c67a"},"img":"https://s3.amazonaws.com/gettattlemisc/harvest/img/action_2.png","cost":4000,"requires":2,"label":"Not So Fast...","text":"Reduce target action attack by 2 for the next attack this turn.","energies":[],"type":"Action","__v":0}
+{"_id":{"$oid":"57243df990acb9343ef2c67b"},"img":"https://s3.amazonaws.com/gettattlemisc/harvest/img/action_1.png","label":"Divergent Shield Master","text":"ONGOING  +3 defense for target mech until target mech is returned to depot for repair","cost":6000,"requires":6,"energies":[],"type":"Action","__v":0}
+{"_id":{"$oid":"57243f4790acb9343ef2c67d"},"label":"Sucker Punch!","img":"https://s3.amazonaws.com/gettattlemisc/harvest/img/action_5.png","text":"Deal 8 damage to any mech on adjacent asteroid","cost":14000,"requires":6,"energies":[],"type":"Action","__v":0}
+{"_id":{"$oid":"57243fdc90acb9343ef2c67e"},"label":"Rubixx","img":"https://s3.amazonaws.com/gettattlemisc/harvest/img/rubixin.png","amount":1,"energies":[],"type":"Resource","__v":0}
+{"_id":{"$oid":"5724402290acb9343ef2c67f"},"label":"Emeraldium","img":"https://s3.amazonaws.com/gettattlemisc/harvest/img/emeraldium.png","amount":1,"energies":[],"type":"Resource","__v":0}
+{"_id":{"$oid":"57244a2e74e9e670562ad5b4"},"label":"Full Synthetic","img":"https://s3.amazonaws.com/gettattlemisc/harvest/img/action_4.png","text":"BUFF - Increase DEF of defender by 4 this turn","cost":4300,"requires":4,"energies":[],"type":"Action","__v":0}
+{"_id":{"$oid":"57244a9574e9e670562ad5b5"},"label":"Mechanized Infrastructure","img":"https://s3.amazonaws.com/gettattlemisc/harvest/img/action_3.png","text":"Extraction of minerals in doubled for target mech this turn, if no other mechs are adjacent.","cost":1500,"requires":3,"energies":[],"type":"Action","__v":0}
+{"_id":{"$oid":"572a5afbbe52f854ad2db38b"},"label":"A Xi 2","amount":2,"energies":["Xi"],"type":"Asteroid","__v":0}
+{"_id":{"$oid":"572a5b07be52f854ad2db38c"},"label":"A Xi 4","amount":4,"energies":["Xi"],"type":"Asteroid","__v":0}
+{"_id":{"$oid":"572a5b12be52f854ad2db38d"},"label":"A Ru 2","amount":2,"energies":["Ru"],"type":"Asteroid","__v":0}
+{"_id":{"$oid":"572a5b1abe52f854ad2db38e"},"label":"A Ru 4","amount":4,"energies":["Ru"],"type":"Asteroid","__v":0}
+{"_id":{"$oid":"572a5b25be52f854ad2db38f"},"label":"A Be 2","amount":2,"energies":["Be"],"type":"Asteroid","__v":0}
+{"_id":{"$oid":"572a5b2ebe52f854ad2db390"},"label":"A Be 4","amount":4,"energies":["Be"],"type":"Asteroid","__v":0}
+{"_id":{"$oid":"572a5b3bbe52f854ad2db391"},"label":"A Py 2","amount":2,"energies":["Py"],"type":"Asteroid","__v":0}
+{"_id":{"$oid":"572a5b48be52f854ad2db392"},"label":"A Py 4","amount":4,"energies":["Py"],"type":"Asteroid","__v":0}

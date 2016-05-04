@@ -33,7 +33,8 @@
       scope.buildField = function() {
         var results = CardsHelper.buildHand(scope.cards, 6);
         scope.field = results.hand;
-        scope.cards = results.cards;
+        scope.cards = results.deck;
+        $log.log('asteroids deck is now ', scope.cards);
       };
     }
   }

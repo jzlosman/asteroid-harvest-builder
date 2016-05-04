@@ -1,0 +1,2 @@
+import call
+mongoimport --db mean-dev --collection cards --file exp.json

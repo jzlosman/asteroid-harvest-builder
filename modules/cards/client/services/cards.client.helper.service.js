@@ -18,31 +18,37 @@
     return service;
 
     function buildPartialDeck(sourceCards, types, amounts) {
-      return _.chain(sourceCards).filter(function(o) {
+      var deck = [];
+      _.chain(sourceCards).filter(function(o) {
         return (types.indexOf(o.type) !== -1);
-      }).map(function(o) {
-        o.count = amounts[types.indexOf(o.type)];
-        return o;
+      }).each(function(o) {
+        var times = amounts[types.indexOf(o.type)];
+        _.times(times, function() {
+          deck.push(o);
+        });
       }).value();
+      return _.shuffle(deck);
     }
 
     function buildHand(deck, x) {
       var hand = [];
       _.times(x, function(i) {
-        hand.push(drawCard(deck));
+        var result = drawCard(deck);
+        hand.push(result.card);
+        deck = result.deck;
       });
-      return hand;
+      return {
+        hand: hand,
+        deck: deck
+      };
     }
 
     function drawCard(deck) {
-      var card = _.chain(deck).shuffle().sample().value();
-      card.copies -= 1;
-      if (card.copies === 0) {
-        $log.log('we are out of this card now!');
-        deck = _.without(deck, card);
-        $log.log('vm deck', deck);
-      }
-      return card;
+      var card = deck.shift();
+      return {
+        card: card,
+        deck: deck
+      };
     }
   }
 
