@@ -25,7 +25,7 @@ var ActionSchema = new Schema({
   targetType: String,
   actionFormula: String,
   cost: Number,
-  requires:Number,
+  requires: Number,
   text: String
 });
 

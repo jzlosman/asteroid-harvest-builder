@@ -37,7 +37,7 @@ exports.invokeRolesPolicies = function () {
       permissions: ['get', 'post']
     }, {
       resources: '/api/cards/:cardId',
-      permissions: ['get','put']
+      permissions: ['get', 'put']
     }]
   }]);
 };

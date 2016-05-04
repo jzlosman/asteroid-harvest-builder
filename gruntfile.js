@@ -303,6 +303,11 @@ module.exports = function (grunt) {
   // Run the project in development mode
   grunt.registerTask('default', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
 
+
+  // Run the project in development mode
+  grunt.registerTask('run', ['env:dev', 'mkdir:upload', 'copy:localConfig', 'concurrent:default']);
+
+
   // Run the project in debug mode
   grunt.registerTask('debug', ['env:dev', 'lint', 'mkdir:upload', 'copy:localConfig', 'concurrent:debug']);
 

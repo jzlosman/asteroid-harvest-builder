@@ -5,7 +5,7 @@
     .module('chat')
     .controller('ChatController', ChatController);
 
-  ChatController.$inject = ['$log', '$scope', '$state', 'Authentication', 'Socket','CardsService','CardsHelper'];
+  ChatController.$inject = ['$log', '$scope', '$state', 'Authentication', 'Socket', 'CardsService', 'CardsHelper'];
 
   function ChatController($log, $scope, $state, Authentication, Socket, CardsService, CardsHelper) {
     var vm = this;
@@ -18,10 +18,10 @@
 
     function init() {
 
-      CardsService.query(function(cards){
+      CardsService.query(function(cards) {
         var deck = CardsHelper.buildDeck(cards);
-        vm.hand = CardsHelper.buildHand(deck,5);
-        $log.log('your hand is ',vm.hand);
+        vm.hand = CardsHelper.buildHand(deck, 5);
+        $log.log('your hand is ', vm.hand);
       });
 
       // If user is not signed in then redirect back home

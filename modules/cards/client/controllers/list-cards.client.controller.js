@@ -11,18 +11,18 @@
     var vm = this;
     vm.hand = [];
 
-    CardsService.query(function(cards){
+    CardsService.query(function(cards) {
       vm.cards = cards;
       vm.deck = CardsHelper.buildDeck(cards);
-      vm.hand = CardsHelper.buildHand(vm.deck,5);
-      $log.log('your hand is ',vm.hand);
+      vm.hand = CardsHelper.buildHand(vm.deck, 5);
+      $log.log('your hand is ', vm.hand);
     });
 
-    vm.drawCard = function(){
+    vm.drawCard = function() {
       var draw = CardsHelper.drawCard(vm.deck);
       vm.deck = draw[1];
       vm.hand.push(draw[0]);
-    }
+    };
 
   }
 }());
