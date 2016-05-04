@@ -23,8 +23,17 @@
         </div>
         <div class="form-group">
           <label class="control-label" for="content">Energy</label>
-          <textarea name="content" data-ng-model="vm.card.energy" id="content" class="form-control" cols="30" rows="10" placeholder="Py, Be, Xi, ..."></textarea>
+          <input name="energy" type="text" ng-model="vm.card.energies" id="content" class="form-control" placeholder="Py,Be,Xi,Ru">
         </div>
+
+        <div ng-if="vm.card.type == 'Asteroid'">
+          <h3>Asteroid properties</h3>
+          <div class="form-group">
+            <label class="control-label" for="content">Minable Total</label>
+              <input name="amount" type="text" ng-model="vm.card.amount" id="amount" class="form-control">
+          </div>
+        </div>
+
 
         <div ng-if="vm.card.type == 'Action'">
           <h3>Action properties</h3>

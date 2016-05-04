@@ -10,47 +10,37 @@
   function CardsHelper($log) {
 
     var service = {
-      loadCards: loadCards,
       buildHand: buildHand,
       drawCard: drawCard,
-      buildDeck: buildDeck
+      buildPartialDeck: buildPartialDeck
     };
 
     return service;
 
-    function buildDeck(sourceCards){
-      var cards = _(sourceCards).sortBy('type');
-      var deck = [];
-      _.each(cards, function(o) {
-        var times = 0;
-        if (o.type == 'Action'){
-          times = 3;
-        } else {
-          times = 5;
-        }
-        _.times(times, function(){
-          deck.push(o);
-        })
-      });
-      return _.shuffle(deck);
+    function buildPartialDeck(sourceCards, types, amounts) {
+      return _.chain(sourceCards).filter(function(o) {
+        return (types.indexOf(o.type) !== -1);
+      }).map(function(o) {
+        o.count = amounts[types.indexOf(o.type)];
+        return o;
+      }).value();
     }
 
-    function buildHand(deck,x) {
+    function buildHand(deck, x) {
       var hand = [];
-      _.times(x, function(i){
-          hand.push(drawCard(deck))
-      })
+      _.times(x, function(i) {
+        hand.push(drawCard(deck));
+      });
       return hand;
     }
 
     function drawCard(deck) {
       var card = _.chain(deck).shuffle().sample().value();
-      //vm.hand.push(card);
       card.copies -= 1;
-      if(card.copies == 0){
+      if (card.copies === 0) {
         $log.log('we are out of this card now!');
-        deck = _.without(deck,card);
-        $log.log('vm deck',deck);
+        deck = _.without(deck, card);
+        $log.log('vm deck', deck);
       }
       return card;
     }

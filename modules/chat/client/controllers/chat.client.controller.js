@@ -17,13 +17,6 @@
     init();
 
     function init() {
-
-      CardsService.query(function(cards){
-        var deck = CardsHelper.buildDeck(cards);
-        vm.hand = CardsHelper.buildHand(deck,5);
-        $log.log('your hand is ',vm.hand);
-      });
-
       // If user is not signed in then redirect back home
       if (!Authentication.user) {
         $state.go('home');
