@@ -48,3 +48,37 @@
 
 
 .overlap{width:4%; z-index: 0;}
+
+
+/* energy colors */
+.bg-ru, .label.ru {
+  background:#a83900;
+}
+.text-ru{
+  color:#a83900;
+}
+
+
+/* energy colors */
+.bg-be, .label.be {
+  background:#22A411;
+}
+.text-be{
+  color:#22A411;
+}
+
+/* energy colors */
+.bg-py, .label.py {
+  background:#1230a8;
+}
+.text-py{
+  color:#1230a8;
+}
+
+/* energy colors */
+.bg-xi, .label.xi {
+  background:#a839a2;
+}
+.text-xi{
+  color:#a839a2;
+}

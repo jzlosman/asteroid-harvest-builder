@@ -1,24 +1,28 @@
 <!-- The chat view -->
 <section class="container">
-  <div class="page-header">
-    <h1>Chat Example</h1>
-  </div>
-  <!-- The message form -->
-  <form class="col-xs-12 col-md-offset-4 col-md-4" ng-submit="vm.sendMessage();">
-    <fieldset class="row">
-      <div class="input-group">
-        <input type="text" id="messageText" name="messageText" class="form-control" ng-model="vm.messageText" placeholder="Enter new message">
-        <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary" ng-disabled="!vm.messageText.length">Submit</button>
-        </span>
-      </div>
-    </fieldset>
-  </form>
+
+
   <game cards='cards'></game>
   <div class="">
-      <asteroid-field cards='cards.asteroids.pile'></asteroid-field>
+      <asteroid-field field='vm.game.asteroids' cards='cards.asteroids.pile'></asteroid-field>
   </div>
+  <game-actions drawables='cards.drawables.pile' user='vm.game.user' field='vm.game.asteroids'></game-actions>
 
+  <user-hand hand='vm.hand' pile='cards.drawables.pile'></user-hand>
+
+  <!-- The message form -->
+  <div class="row">
+    <form class="col-xs-12 col-md-offset-4 col-md-4" ng-submit="vm.sendMessage();">
+      <fieldset class="row">
+        <div class="input-group">
+          <input type="text" id="messageText" name="messageText" class="form-control" ng-model="vm.messageText" placeholder="Enter new message">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary" ng-disabled="!vm.messageText.length">Submit</button>
+          </span>
+        </div>
+      </fieldset>
+    </form>
+  </div>
   <ul class="list-unstyled">
     <!-- List all messages -->
     <li class="col-xs-12 col-md-offset-4 col-md-4 chat-message" ng-repeat="message in vm.messages">

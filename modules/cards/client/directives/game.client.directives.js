@@ -43,7 +43,7 @@
       function getAllSourceCards() {
         CardsService.query(function(cards) {
           scope.source = cards;
-          scope.cards.drawables.pile = CardsHelper.buildPartialDeck(scope.source, ['Action'], [3]);
+          scope.cards.drawables.pile = CardsHelper.buildPartialDeck(scope.source, ['Action'], [6]);
           scope.cards.asteroids.pile = CardsHelper.buildPartialDeck(scope.source, ['Asteroid'], [3]);
           scope.cards.resources.pile = CardsHelper.buildPartialDeck(scope.source, ['Resource'], [6]);
 

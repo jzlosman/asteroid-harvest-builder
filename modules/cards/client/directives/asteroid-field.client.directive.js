@@ -11,21 +11,23 @@
       retrict: 'E',
       link: link,
       scope: {
-        cards: '='
+        cards: '=',
+        field: '='
       },
-      template: "ASTEROID FIELD" +
+      template: "" +
       "<button ng-click='buildField()'>Build Asteroid Field</button><div class='row'>" +
-      "<div class='col-xs-4' ng-repeat='card in field track by $index'><div class='asteroid'><h1>{{card.label}}</h1> <strong>Mineable resources remaining: {{card.amount}}</strong><br/><div class='energies'><span class='label' ng-repeat='energy in energies'>{{energy}}</span></div></div></div>" +
+      "<div class='col-xs-4' ng-repeat='card in field track by $index'><div class='asteroid'>"+
+      "<div class='pull-right'><strong><img src='https://s3.amazonaws.com/gettattlemisc/harvest/icons/crushing-ground.svg' style='width:24px;height:auto'/>x{{card.amount}}</strong></div>"+
+      "<div class='pull-left energies'><span class='label label-default {{energy | energyToLabel}}' ng-repeat='energy in card.energies'>{{energy}}</span></div></div></div>" +
       "</div>"
     };
 
     return directive;
 
     function link(scope, element) {
-      scope.field = [];
-
       scope.$watch('cards', function() {
         if (scope.cards !== undefined) {
+          scope.field = [];
           scope.buildField();
         }
       });
