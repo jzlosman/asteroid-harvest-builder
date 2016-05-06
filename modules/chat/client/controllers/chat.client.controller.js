@@ -34,6 +34,12 @@
         Socket.connect();
       }
 
+      Socket.on('move', function(message) {
+        if (Authentication.user.username !== message.username) {
+          $log.log('receiving move');
+          vm.movePlayer(message.position, false);
+        }
+      });
       // Add an event listener to the 'chatMessage' event
       Socket.on('chatMessage', function (message) {
         vm.messages.unshift(message);
@@ -43,6 +49,30 @@
       $scope.$on('$destroy', function () {
         Socket.removeListener('chatMessage');
       });
+    }
+
+    vm.movePlayer = function(position, isYou) {
+      var occupied = 2;
+      if (isYou) {
+        occupied = 1;
+      }
+      _.each(vm.game.asteroids, function(o) {
+        if (o.occupied !== undefined && o.occupied === occupied) {
+          o.occupied = 0;
+        }
+      });
+      _.each(vm.game.asteroids, function(o, i, l) {
+        if (i === position) {
+          if (o.occupied !== undefined && o.occupied === occupied) {
+            return;
+          }
+          o.occupied = occupied;
+        }
+      });
+      if (isYou) {
+        $log.log('sending move');
+        Socket.emit('move', { position: position });
+      }
     }
 
     // Create a controller method for sending messages

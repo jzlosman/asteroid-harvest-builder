@@ -12,11 +12,12 @@
       link: link,
       scope: {
         cards: '=',
-        field: '='
+        field: '=',
+        move: '&'
       },
       template: "" +
       "<button ng-click='buildField()'>Build Asteroid Field</button><div class='row'>" +
-      "<div class='col-xs-4' ng-repeat='card in field track by $index'><div class='asteroid'>"+
+      "<div class='col-xs-4' ng-repeat='card in field track by $index'><div class='asteroid' ng-class='{\"occupied-you\":card.occupied == 1, \"occupied-them\":card.occupied == 2}' ng-click='move({position:$index, isYou:true})'>" +
       "<div class='pull-right'><strong><img src='https://s3.amazonaws.com/gettattlemisc/harvest/icons/crushing-ground.svg' style='width:24px;height:auto'/>x{{card.amount}}</strong></div>"+
       "<div class='pull-left energies'><span class='label label-default {{energy | energyToLabel}}' ng-repeat='energy in card.energies'>{{energy}}</span></div></div></div>" +
       "</div>"

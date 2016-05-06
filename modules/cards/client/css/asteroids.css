@@ -4,3 +4,10 @@
   padding:12px;
   margin:12px 0;
 }
+
+.occupied-you{
+  border:2px solid #a74392;
+}
+.occupied-them{
+  border:2px solid #2243a4;
+}

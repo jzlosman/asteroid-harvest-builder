@@ -4,7 +4,7 @@
 
   <game cards='cards'></game>
   <div class="">
-      <asteroid-field field='vm.game.asteroids' cards='cards.asteroids.pile'></asteroid-field>
+      <asteroid-field field='vm.game.asteroids' cards='cards.asteroids.pile' move="vm.movePlayer(position, isYou);"></asteroid-field>
   </div>
   <game-actions drawables='cards.drawables.pile' user='vm.game.user' field='vm.game.asteroids'></game-actions>
 
