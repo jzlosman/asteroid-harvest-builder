@@ -33,6 +33,34 @@ module.exports = function (io, socket) {
     io.emit('move', message);
   });
 
+  // Send a chat messages to all connected sockets when a message is received
+  socket.on('removeDrawable', function (message) {
+    message.type = 'Drawables';
+    message.created = Date.now();
+    message.username = socket.request.user.username;
+    // Emit the 'chatMessage' event
+    io.emit('removeDrawable', message);
+  });
+
+  // Send a chat messages to all connected sockets when a message is received
+  socket.on('sendAsteroids', function (message) {
+    message.type = 'Asteroids';
+    message.created = Date.now();
+    message.username = socket.request.user.username;
+    // Emit the 'chatMessage' event
+    io.emit('sendAsteroids', message);
+  });
+
+  // Send a chat messages to all connected sockets when a message is received
+  socket.on('sendDrawables', function (message) {
+    message.type = 'Drawables';
+    message.created = Date.now();
+    message.username = socket.request.user.username;
+    // Emit the 'chatMessage' event
+    io.emit('sendDrawables', message);
+  });
+
+
   // Emit the status event when a socket client is disconnected
   socket.on('disconnect', function () {
     io.emit('chatMessage', {

@@ -17,6 +17,7 @@
     vm.game = {
       user: {
       },
+      source: [],
       asteroids: []
     };
 
@@ -57,23 +58,15 @@
         occupied = 1;
       }
       _.each(vm.game.asteroids, function(o) {
-        if (o.occupied !== undefined && o.occupied === occupied) {
-          o.occupied = 0;
+        if (o.properties.occupied !== undefined && o.properties.occupied === occupied) {
+          o.properties.occupied = 0;
         }
       });
-      _.each(vm.game.asteroids, function(o, i, l) {
-        if (i === position) {
-          if (o.occupied !== undefined && o.occupied === occupied) {
-            return;
-          }
-          o.occupied = occupied;
-        }
-      });
+      vm.game.asteroids[position].properties.occupied = occupied;
       if (isYou) {
-        $log.log('sending move');
         Socket.emit('move', { position: position });
       }
-    }
+    };
 
     // Create a controller method for sending messages
     function sendMessage() {
