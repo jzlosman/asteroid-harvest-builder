@@ -13,7 +13,9 @@ module.exports = function (io, socket) {
 
   // Send a chat messages to all connected sockets when a message is received
   socket.on('chatMessage', function (message) {
-    message.type = 'message';
+    if (message.type === undefined) {
+      message.type = 'message';
+    }
     message.created = Date.now();
     message.profileImageURL = socket.request.user.profileImageURL;
     message.username = socket.request.user.username;

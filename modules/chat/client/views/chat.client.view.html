@@ -2,13 +2,11 @@
 <section class="container">
 
 
-  <game cards='cards' source='vm.source'></game>
+  <gameboard game='vm.game' source='vm.source'></gameboard>
   <div class="">
-      <asteroid-field field='vm.game.asteroids' cards='cards.asteroids.pile' move="vm.movePlayer(position, isYou);"></asteroid-field>
+      <asteroid-field field='vm.game.decks.asteroids' cards='vm.game.decks.asteroids.pile' move="vm.movePlayer(position, isYou);"></asteroid-field>
   </div>
-  <game-actions drawables='cards.drawables.pile' user='vm.game.user' field='vm.game.asteroids'></game-actions>
-
-  <user-hand hand='vm.hand' pile='cards.drawables.pile'></user-hand>
+  <user-hand game='vm.game' player='vm.game.players[vm.game.turn]'></user-hand>
 
   <!-- The message form -->
   <div class="row">
@@ -26,12 +24,12 @@
   <ul class="list-unstyled">
     <!-- List all messages -->
     <li class="col-xs-12 col-md-offset-4 col-md-4 chat-message" ng-repeat="message in vm.messages">
-      <small class="pull-right text-muted" ng-bind="message.created | date:'mediumTime'"></small>
+      <small class="pull-right text-muted"  ng-bind="message.created | date:'mediumTime'"></small>
       <img ng-src="{{message.profileImageURL}}" alt="{{message.username}}" class="pull-left chat-profile-image" />
       <div class="pull-left chat-message-details">
         <strong ng-bind="message.username"></strong>
         <br>
-        <span ng-bind="message.text"></span>
+        <span ng-class='"type-"+message.type' ng-bind="message.text"></span>
       </div>
     </li>
   </ul>

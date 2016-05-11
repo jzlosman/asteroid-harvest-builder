@@ -10,8 +10,6 @@
   function CardsHelper($log, Socket) {
 
     var service = {
-      buildHand: buildHand,
-      drawCard: drawCard,
       removeCard: removeCard,
       buildPartialDeck: buildPartialDeck,
       buildExistingPartialDeck: buildExistingPartialDeck,
@@ -51,18 +49,6 @@
       });
     }
 
-    function buildHand(deck, x) {
-      var hand = [];
-      _.times(x, function(i) {
-        var result = drawCard(deck);
-        hand.push(result.card);
-        deck = result.deck;
-      });
-      return {
-        hand: hand,
-        deck: deck
-      };
-    }
 
     function removeCard(deck, id) {
       deck = _.reject(deck, function(o) {
@@ -71,14 +57,7 @@
       return deck;
     }
 
-    function drawCard(deck) {
-      var card = deck.shift();
-      Socket.emit('removeDrawable', { id: card.id });
-      return {
-        card: card,
-        deck: deck
-      };
-    }
+
   }
 
 }());

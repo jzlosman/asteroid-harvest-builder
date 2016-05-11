@@ -13,3 +13,13 @@
   width: 28px;
   border-radius: 50%;
 }
+
+.type-message {
+
+}
+.type-play {
+  color:#20a049;
+}
+.type-update {
+  color:#4349a0;
+}

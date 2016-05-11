@@ -5,26 +5,23 @@
     .module('chat')
     .controller('ChatController', ChatController);
 
-  ChatController.$inject = ['$log', '$scope', '$state', 'Authentication', 'Socket', 'CardsService', 'CardsHelper'];
+  ChatController.$inject = ['$log', '$scope', '$state', 'Authentication', 'Socket', 'CardsService', 'CardsHelper', 'Game'];
 
-  function ChatController($log, $scope, $state, Authentication, Socket, CardsService, CardsHelper) {
+  function ChatController($log, $scope, $state, Authentication, Socket, CardsService, CardsHelper, Game) {
     var vm = this;
 
     vm.messages = [];
     vm.messageText = '';
     vm.sendMessage = sendMessage;
 
-    vm.game = {
-      user: {
-      },
-      source: [],
-      asteroids: []
-    };
+    vm.game = {};
 
 
     init();
 
     function init() {
+
+      vm.game = Game.create();
       // If user is not signed in then redirect back home
       if (!Authentication.user) {
         $state.go('home');

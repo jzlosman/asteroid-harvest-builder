@@ -9,21 +9,17 @@
 
   function gameActions(/*Example: $state, $window */) {
     return {
-      template: ''+
-      '<div>'+
-        '<strong>{{drawables.length}} cards</strong> in draw pile'+
-        ''+
+      template: '' +
+      '<div>' +
+        '<strong>{{scope.game.decks.drawables.pile.length}} cards</strong> in draw pile' +
+        '' +
       '</div>',
-      restrict: 'E',
       scope: {
-        drawables: '=',
-        resources: '=',
-        field: '=',
-        user: '='
+        game: '='
       },
+      restrict: 'E',
       link: function postLink(scope, element, attrs) {
-
       }
     };
   }
-})();
+}());

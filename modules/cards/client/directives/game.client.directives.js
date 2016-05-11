@@ -2,23 +2,23 @@
   'use strict';
 
   angular.module('cards')
-    .directive('game', game);
+    .directive('gameboard', game);
 
-  game.$inject = ['$rootScope', '$timeout', '$interpolate', '$state', '$log', 'Authentication', 'Socket', 'CardsService', 'CardsHelper'];
+  game.$inject = ['$rootScope', '$timeout', '$interpolate', '$state', '$log', 'Authentication', 'Socket', 'CardsService', 'CardsHelper', 'Game'];
 
-  function game($rootScope, $timeout, $interpolate, $state, $log, Authentication, Socket, CardsService, CardsHelper) {
+  function game($rootScope, $timeout, $interpolate, $state, $log, Authentication, Socket, CardsService, CardsHelper, Game) {
     var directive = {
       retrict: 'E',
       link: link,
       scope: {
-        cards: '=',
         source: '=',
-        field: '=',
-        user: '='
+        game: '='
       },
       template: '' +
       '<div>' +
-        '<strong>{{drawables.length}} cards</strong> in draw pile.  <button ng-click="buildDecks()">Create Decks</button>  <button ng-click="sendDecks()">Send Decks</button>' +
+        'Player: {{game.players[game.turn].hero.name}}  |   Magic: {{game.players[game.turn].magic[1]}}/{{game.players[game.turn].magic[0]}}  |  ' +
+        '<strong>{{game.decks.drawables.pile.length}} cards</strong> in draw pile.<br/>' +
+        '<button ng-click="endTurn()">End Turn</button> <button ng-click="sendDecks()">Send Decks</button>' +
         '' +
       '</div>'
     };
@@ -33,47 +33,37 @@
           if (Authentication.user.username === deck.username) {
             return;
           }
-          scope.cards.asteroids.pile = CardsHelper.buildExistingPartialDeck(scope.source, deck.ids, { occupied: 0 });
+          scope.game.decks.asteroids.pile = CardsHelper.buildExistingPartialDeck(scope.source, deck.ids, { occupied: 0 });
         });
 
         Socket.on('sendDrawables', function (deck) {
           if (Authentication.user.username === deck.username) {
             return;
           }
-          scope.cards.drawables.pile = CardsHelper.buildExistingPartialDeck(scope.source, deck.ids, {});
+          scope.game.decks.drawables.pile = CardsHelper.buildExistingPartialDeck(scope.source, deck.ids, {});
         });
 
         Socket.on('removeDrawable', function (event) {
           if (Authentication.user.username === event.username) {
             return;
           }
-          scope.cards.drawables.pile = CardsHelper.removeCard(scope.cards.drawables.pile, event.id);
+          scope.game.decks.drawables.pile = CardsHelper.removeCard(scope.cards.drawables.pile, event.id);
         });
       }
-
-      scope.cards = {
-        drawables: {
-          pile: [],
-          discard: []
-        },
-        resources: {
-          pile: [],
-          discard: []
-        },
-        asteroids: {
-          pile: [],
-          field: [],
-          discard: []
-        }
-      };
 
       scope.source = [];
 
       function getSources() {
         CardsService.query(function(cards) {
           scope.source = cards;
+          scope.game.prepareGame(scope.source);
+          scope.game.startGame([{ name: 'Jeremy' }, { name: 'Timmy' }], [{ name: 'Atticus O\'Sullivan' }, { name: 'Owen' }]);
         });
       }
+
+      scope.endTurn = function() {
+        scope.game.endTurn();
+      };
 
       scope.sendDecks = function() {
         var asteroidIds = CardsHelper.getDeckIds(scope.cards.asteroids.pile);
@@ -82,15 +72,6 @@
         Socket.emit('sendDrawables', { type: 'Drawables', ids: drawableIds });
       };
 
-      scope.buildDecks = function() {
-        scope.cards.drawables.pile = CardsHelper.buildPartialDeck(scope.source, ['Action'], [6], {});
-        scope.cards.asteroids.pile = CardsHelper.buildPartialDeck(scope.source, ['Asteroid'], [3], { occupied: 0 });
-        scope.cards.resources.pile = CardsHelper.buildPartialDeck(scope.source, ['Resource'], [6], { used: 0 });
-
-        $log.log('drawables: ', scope.cards.drawables);
-        $log.log('asteroids: ', scope.cards.asteroids);
-        $log.log('resources: ', scope.cards.resources);
-      };
       init();
     }
   }
