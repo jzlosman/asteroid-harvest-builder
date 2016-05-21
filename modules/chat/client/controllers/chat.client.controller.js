@@ -5,9 +5,9 @@
     .module('chat')
     .controller('ChatController', ChatController);
 
-  ChatController.$inject = ['$log', '$scope', '$state', 'Authentication', 'Socket', 'CardsService', 'CardsHelper', 'Game'];
+  ChatController.$inject = ['$log', '$scope', '$state', '$stateParams', 'Authentication', 'Socket', 'CardsService', 'CardsHelper', 'Game'];
 
-  function ChatController($log, $scope, $state, Authentication, Socket, CardsService, CardsHelper, Game) {
+  function ChatController($log, $scope, $state, $stateParams, Authentication, Socket, CardsService, CardsHelper, Game) {
     var vm = this;
 
     vm.messages = [];
@@ -22,6 +22,7 @@
     function init() {
 
       vm.game = Game.create();
+      vm.game.joinGame($stateParams.id);
       // If user is not signed in then redirect back home
       if (!Authentication.user) {
         $state.go('home');
@@ -31,6 +32,10 @@
       if (!Socket.socket) {
         Socket.connect();
       }
+
+      Socket.on('join', function (message) {
+        $log.log('someone joined');
+      });
 
       Socket.on('move', function(message) {
         if (Authentication.user.username !== message.username) {

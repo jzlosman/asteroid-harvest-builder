@@ -30,6 +30,7 @@
         <strong ng-bind="message.username"></strong>
         <br>
         <span ng-class='"type-"+message.type' ng-bind="message.text"></span>
+        <span ng-class='"type-"+message.type' ng-if="message.game_id" ng-bind="message.game_id"></span>
       </div>
     </li>
   </ul>

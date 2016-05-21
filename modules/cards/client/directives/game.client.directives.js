@@ -54,11 +54,7 @@
       scope.source = [];
 
       function getSources() {
-        CardsService.query(function(cards) {
-          scope.source = cards;
-          scope.game.prepareGame(scope.source);
-          scope.game.startGame([{ name: 'Jeremy' }, { name: 'Timmy' }], [{ name: 'Atticus O\'Sullivan' }, { name: 'Owen' }]);
-        });
+        
       }
 
       scope.endTurn = function() {

@@ -1,0 +1,51 @@
+<section>
+  <div class="page-header">
+    <h1 data-ng-bind="vm.game.name"></h1>
+  </div>
+  <div class="pull-right"
+       data-ng-show="vm.game.isCurrentUserOwner">
+    <a class="btn btn-primary"
+       data-ui-sref="games.edit({ gameId: vm.game._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" data-ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span data-ng-bind="vm.game.created | date:'mediumDate'"></span>
+      by
+      <span data-ng-if="vm.game.user"
+            data-ng-bind="vm.game.user.displayName"></span>
+      <span data-ng-if="!vm.game.user">Deleted User</span>
+    </em>
+  </small>
+  <p class="lead" data-ng-bind="vm.game.content"></p>
+</section>
+
+<!-- The chat view -->
+<section class="container">
+
+
+  <gameboard game='vm.session' source='vm.source'></gameboard>
+  <div class="">
+      <asteroid-field field='vm.session.decks.asteroids' cards='vm.session.decks.asteroids.pile' move="vm.movePlayer(position, isYou);"></asteroid-field>
+  </div>
+  <user-hand game='vm.session' player='vm.session.players[vm.session.turn]'></user-hand>
+
+  <ul class="list-unstyled">
+    <!-- List all messages -->
+    <li class="col-xs-12 col-md-offset-4 col-md-4 chat-message" ng-repeat="message in vm.messages">
+      <small class="pull-right text-muted"  ng-bind="message.created | date:'mediumTime'"></small>
+      <img ng-src="{{message.profileImageURL}}" alt="{{message.username}}" class="pull-left chat-profile-image" />
+      <div class="pull-left chat-message-details">
+        <strong ng-bind="message.username"></strong>
+        <br>
+        <span ng-class='"type-"+message.type' ng-bind="message.text"></span>
+        <span ng-class='"type-"+message.type' ng-if="message.game_id" ng-bind="message.game_id"></span>
+      </div>
+    </li>
+  </ul>
+</section>
